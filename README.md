@@ -2,6 +2,8 @@
 
 Python simulation of an infant incubator and a preterm baby during mains outages and sustained undervoltage, with a backup battery and a controller.
 
+**Try it online:** [live dashboard](https://incubator-power-resilience-xvlp6snqjmihc9ytybcjnl.streamlit.app/) | **More projects:** [portfolio](https://alusine-bah.github.io)
+
 ## Summary
 When the grid fails, how long does a baby in an incubator stay warm, and how big must a backup battery be? This project simulates an incubator, a 2 kg preterm baby and a backup battery through blackouts and long low-voltage events. It checks its own results against earlier runs and lists what it leaves out.
 
