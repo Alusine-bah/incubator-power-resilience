@@ -1,4 +1,4 @@
-﻿import numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 from model import Params, grid_profile, repeated_outages, simulate
@@ -13,11 +13,17 @@ st.caption(
     "and must not be used for clinical decisions."
 )
 
+st.warning(
+    "Provisional numbers: the default heat loss (5 W per " + D + ") is about a third of the value measured on one commercial incubator "
+    "(about 15 W per " + D + ", see PARAMETERS.md). Battery sizes at the default are likely too small for such a device. "
+    "Move the heat-loss slider to 15 to see the effect. Update in progress."
+)
+
 sb = st.sidebar
 sb.header("1. The incubator")
 heater = sb.slider("Heater power (W)", 150, 500, 300, 25,
     help="Heater power at full voltage. 300 W is the default because a 200 W heater cannot meet the 20-minute warm-up of a commercial unit (VNG 3000 datasheet).")
-ua = sb.slider("Heat leaking to the room (W per " + D + ")", 2.0, 10.0, 5.0, 0.5,
+ua = sb.slider("Heat leaking to the room (W per " + D + ")", 2.0, 20.0, 5.0, 0.5,
     help="Watts lost for every degree the incubator is warmer than the room. Default 5. Two papers calculate about 3.8 and 4.2 (neither measured). This is the number that changes the battery size most.")
 room = sb.slider("Room temperature (" + D + ")", 16, 30, 22,
     help="Datasheets list 20 to 30 degrees. Below 20 is a stress test.")

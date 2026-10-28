@@ -4,6 +4,8 @@ Python simulation of an infant incubator and a preterm baby during mains outages
 
 **Try it online:** [live dashboard](https://incubator-power-resilience.streamlit.app) | **More projects:** [portfolio](https://alusine-bah.github.io)
 
+> **Provisional numbers.** A measurement on a real commercial incubator (AMS Amenity XP; the two papers are listed in PARAMETERS.md) gives a heat loss of about 15 W per °C, roughly three times the 5 W per °C used for the results below. For such a device the battery sizes below are likely about three times too small, and the heater has less margin against low voltage. The model, dashboard and README are being updated.
+
 ## Summary
 When the grid fails, how long does a baby in an incubator stay warm, and how big must a backup battery be? This project simulates an incubator, a 2 kg preterm baby and a backup battery through blackouts and long low-voltage events. It checks its own results against earlier runs and lists what it leaves out.
 
