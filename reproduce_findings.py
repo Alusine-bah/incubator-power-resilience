@@ -1,5 +1,5 @@
 ﻿from dataclasses import replace
-from model import Params, grid_profile, repeated_outages, simulate
+from model import Params, legacy_params, grid_profile, repeated_outages, simulate
 
 BIG = 1000000
 bad = []
@@ -20,7 +20,7 @@ def check_range(name, lo, hi, got):
 
 
 def brownout(heater, ua, v, hours=6.0):
-    p = replace(Params(), heater_w=float(heater), ua=float(ua))
+    p = replace(legacy_params(), heater_w=float(heater), ua=float(ua))
     g = grid_profile([(0.5, hours, v)], 0.5 + hours + 4)
     return simulate(p, g, BIG)
 
@@ -46,7 +46,7 @@ print()
 print("--- Blackout energy, UA 5, room 22 C, immediate transfer to battery ---")
 for hours in (1.5, 2.0, 3.0, 8.0, 11.0):
     g = grid_profile([(0.5, hours, 0.0)], 0.5 + hours + 4)
-    r = simulate(Params(), g, BIG)
+    r = simulate(legacy_params(), g, BIG)
     wh = r["battery_used_wh"]
     print(f"INFO | {hours} h blackout: battery {wh:.0f} Wh = {wh / hours:.1f} Wh per hour, "
           f"rating at 80% usable {wh / 0.8:.0f} Wh, lowest core {r['lowest_core']:.2f}")
@@ -56,7 +56,7 @@ for hours in (1.5, 2.0, 3.0, 8.0, 11.0):
 print()
 print("--- No backup, 2 h blackout ---")
 for cap_kj, want in ((5, 30.90), (10, 31.68), (20, 32.98), (30, 33.60)):
-    pp = replace(Params(), air_capacity=cap_kj * 1000.0)
+    pp = replace(legacy_params(), air_capacity=cap_kj * 1000.0)
     g = grid_profile([(0.5, 2.0, 0.0)], 6.5)
     r = simulate(pp, g, 0)
     check(f"C = {cap_kj} kJ/C: lowest core", want, r["lowest_core"], 0.1)
@@ -66,7 +66,7 @@ print("--- Repeated blackouts, 3 a day for 48 h ---")
 cases = [(1.5, 100, 87, 36.82), (1.5, 150, 0, 36.99), (3.0, 100, 639, 33.33),
          (3.0, 150, 397, 35.10), (3.0, 200, 197, 36.40), (3.0, 300, 0, 36.99)]
 for length, rating, empty, core in cases:
-    r = simulate(Params(), grid_profile(repeated_outages(length), 48), rating)
+    r = simulate(legacy_params(), grid_profile(repeated_outages(length), 48), rating)
     check(f"{length} h, {rating} Wh: minutes battery empty", empty, r["minutes_battery_empty"], max(5, 0.03 * empty))
     check(f"{length} h, {rating} Wh: lowest core", core, r["lowest_core"], 0.1)
 
@@ -86,4 +86,5 @@ for w, want in ((200, 26.2), (250, 20.1), (300, 16.3), (400, 11.8)):
 
 print()
 print("Everything reproduced." if not bad else f"{len(bad)} differ: " + "; ".join(bad))
+
 
