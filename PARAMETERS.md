@@ -113,3 +113,8 @@ Status: CITED = a published value supports it; DERIVED = our arithmetic from pub
 - Heat loss UA = 162.95 / (36 - 25) = 14.8 W/°C (15.3 on the electrical figure), about three times the 5 W/°C used so far. The calculated values (3.8 W/°C, Kapen 2019; 4.2 W/°C, Nwaneri 2020) came from wooden or acrylic prototypes, omit ventilation and base losses, and were not measured.
 - Limits: one device, 2006, one operating point, empty hood. The fan stops in a blackout, so ventilation loss (about 2.3 W/°C) stops too while mixing also stops: not modelled.
 - Simulated effect (UA 14.8, heater 350 W, baby heat 4 W, room 22 °C): 2 h blackout 380 Wh used (rating 475 Wh); 3 h 570 Wh (712 Wh); 8 h 1516 Wh (1895 Wh). No backup: lowest core about 29.9 °C after 2 h. 6 h of low voltage: battery needed at 0.6 of nominal (406 Wh) and 0.55 (564 Wh); none at 0.7 or above. At UA 5 with the same heater and baby: 158, 237 and 634 Wh.
+
+## Correction and README rewrite
+- Earlier low-voltage notes quoted battery ENERGY USED (406 Wh at 0.6 of nominal for 6 h, 564 Wh at 0.55) as the battery needed. The rated battery size at 80 percent usable is 508 Wh and 706 Wh. The README now quotes rated sizes.
+- The 2 h no-backup figure quoted earlier (31 to 34 C) came from the old assumptions (heat loss 5 W/C, baby heat 3 W). With the measured heat loss it is about 30 C.
+- README rewritten from the model defaults; reproduce_findings.py re-runs every README number (all reproduced). Added: birth-weight slider (0.5 to 4 kg), setpoint table by weight (UCSF 2004), charger default 200 W (assumption), and a fix to the empty-battery count in low-voltage events.
