@@ -1,0 +1,54 @@
+Inputs varied (all other inputs at their defaults; 2 kg baby):
+  heat_loss: triangular 10 / 14.8 / 20 W per C (chosen, centred on the one measurement)
+  baby_heat: uniform 1.9 to 2.8 W per kg (oxygen consumption and energy expenditure studies)
+  room: uniform 20 to 30 C (datasheet operating range)
+  heat_stored: uniform 5 to 30 kJ per C (assumption)
+  heater: uniform 300 to 400 W (around the 368 W measured maximum)
+  efficiency: uniform 0.80 to 0.95 (inverter datasheet and idle draw)
+  outage_hours: lognormal, median 1.5 h, sigma 0.9, limited to 0.25 to 11 h (chosen to span the published ranges)
+  grid_voltage: uniform 0.55 to 0.90 of nominal (Sierra Leone sensor data)
+
+2000 random cases, seed 2026.
+
+1. Rated battery needed per outage hour (80 percent usable), 2 kg baby
+   5th 82, 25th 121, median 172, 75th 228, 95th 300 Wh per hour
+
+2. Share of outages a given battery covers (outage length drawn from the chosen distribution)
+     250 Wh covers 49% of cases
+     500 Wh covers 76% of cases
+     750 Wh covers 87% of cases
+    1000 Wh covers 92% of cases
+    1500 Wh covers 97% of cases
+    2000 Wh covers 99% of cases
+   battery covering 50% of cases: 258 Wh
+   battery covering 90% of cases: 854 Wh
+   battery covering 95% of cases: 1205 Wh
+
+3. No backup, 2 h blackout, 2 kg baby: lowest core temperature
+   median 31.5 C, 5th to 95th percentile 28.1 to 34.4 C
+   below 32 C in 58% of cases; below 36.5 C in 100%
+
+4. Grid at 0.55 to 0.90 of nominal for 6 h, 2 kg baby
+   no battery needed in 83% of cases
+   when needed, rated battery median 550 Wh, 95th percentile 1256 Wh
+   no backup: core below 36.5 C in 18% of cases; below 32 C in 2%
+
+5. Which inputs matter (Spearman rank correlation; closer to 1 or -1 means stronger)
+   battery per outage hour: heat loss +0.36, room temperature -0.93, converter efficiency -0.10, baby heat production +0.01, heat stored in incubator +0.05, heater power +0.01
+   no-backup lowest temperature (2 h): heat loss -0.09, room temperature +0.98, converter efficiency -0.02, baby heat production -0.15, heat stored in incubator +0.09, heater power -0.01
+
+6. Median rated battery per outage hour by birth weight (500 cases each)
+   0.5 kg: median 219 Wh per hour (5th to 95th: 122 to 338)
+   1.0 kg: median 207 Wh per hour (5th to 95th: 113 to 324)
+   2.0 kg: median 176 Wh per hour (5th to 95th: 84 to 292)
+   3.0 kg: median 164 Wh per hour (5th to 95th: 75 to 280)
+   4.0 kg: median 156 Wh per hour (5th to 95th: 67 to 271)
+
+7. Rated battery per outage hour by room temperature (measured heat loss 14.8, 2 kg baby, default incubator)
+   room 20 C: 278 Wh per outage hour
+   room 22 C: 237 Wh per outage hour
+   room 25 C: 174 Wh per outage hour
+   room 28 C: 113 Wh per outage hour
+   room 30 C: 73 Wh per outage hour
+
+Saved docs/uncertainty.png (192 s, 7 workers)

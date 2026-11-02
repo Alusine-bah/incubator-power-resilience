@@ -118,3 +118,13 @@ Status: CITED = a published value supports it; DERIVED = our arithmetic from pub
 - Earlier low-voltage notes quoted battery ENERGY USED (406 Wh at 0.6 of nominal for 6 h, 564 Wh at 0.55) as the battery needed. The rated battery size at 80 percent usable is 508 Wh and 706 Wh. The README now quotes rated sizes.
 - The 2 h no-backup figure quoted earlier (31 to 34 C) came from the old assumptions (heat loss 5 W/C, baby heat 3 W). With the measured heat loss it is about 30 C.
 - README rewritten from the model defaults; reproduce_findings.py re-runs every README number (all reproduced). Added: birth-weight slider (0.5 to 4 kg), setpoint table by weight (UCSF 2004), charger default 200 W (assumption), and a fix to the empty-battery count in low-voltage events.
+
+
+## Uncertainty analysis input ranges (python uncertainty.py)
+- Heat loss: triangular 10 / 14.8 / 20 W/C. Peak is the one measurement; the range is my choice (other incubators will differ).
+- Baby heat production: uniform 1.9 to 2.8 W/kg (oxygen consumption and resting energy expenditure studies).
+- Room temperature: uniform 20 to 30 C (datasheet operating range). Dominates the results; real ward temperatures at the target hospitals are not yet found.
+- Heat stored 5 to 30 kJ/C (assumption); heater 300 to 400 W (around the 368 W measured maximum); converter efficiency 0.80 to 0.95 (inverter datasheet and idle draw).
+- Outage length: lognormal, median 1.5 h, sigma 0.9, limited to 0.25 to 11 h. My choice, to span the Sierra Leone and DR Congo ranges; coverage figures depend on it.
+- Grid voltage 0.55 to 0.90 of nominal (Sierra Leone sensor range).
+- Result: median rated battery 172 Wh per outage hour (90 percent of cases 82 to 300); room temperature rank correlation -0.93. Full output in docs/uncertainty_results.txt (seed 2026; the same numbers appeared on two computers).

@@ -12,6 +12,7 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - Heat loss is the main lever. For a 2 h blackout the rated battery is 158 Wh at 5 W/°C, 256 Wh at 8, 350 Wh at 11, 475 Wh at 14.8 (measured) and 642 Wh at 20. A lower heat loss shrinks the battery in proportion; whether a practical incubator can reach a low value was not tested.
 - Low voltage: the 350 W heater holds the setpoint with no battery when the grid is at 0.7 of nominal or higher. At 0.6 for 6 h the rated battery must be about 508 Wh, and at 0.55 about 706 Wh. Without backup the baby spends 506 minutes (0.6) and 553 minutes (0.55) below 36.5 °C. Sensors in Sierra Leone recorded grid voltage as low as 0.55 of nominal.
 - Charger: for three 2 h blackouts a day, a 476 Wh battery works if the charger delivers 100 W or more. With a 60 W charger the battery cannot refill between blackouts and 814 Wh is needed. For 3 h blackouts the figures are 713 Wh with a 200 W charger and 2,566 Wh with 60 W.
+- Uncertainty: across 2,000 random cases drawn from the published ranges, the rated battery per outage hour has a median of 172 Wh (90 percent of cases between 82 and 300 Wh), and room temperature matters most. See the section on how sure the conclusions are.
 - Not validated: the heat loss comes from one device, and several other inputs rest on a single source or are assumptions (see the table below and PARAMETERS.md).
 
 ![Baby temperature in a 2 h blackout, with and without a 500 Wh battery](docs/blackout_example.png)
@@ -24,6 +25,7 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - check_model.py: tests the model against earlier results and published ranges
 - reproduce_findings.py: re-runs every number in this README through the model
 - make_figure.py: regenerates the example figure in docs/
+- uncertainty.py: varies the inputs across their ranges and saves docs/uncertainty.png and the results
 - PARAMETERS.md: where each input comes from, the papers reviewed, and open issues
 
 ## How to run
@@ -32,6 +34,7 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - Check every README number against the model: python reproduce_findings.py
 - Start the interactive dashboard: python -m streamlit run app.py
 - Regenerate the example figure: python make_figure.py
+- Run the uncertainty analysis (about 4 minutes): python uncertainty.py
 
 ## Model (default settings)
 | Input | Value | Source or status |
@@ -47,6 +50,19 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 | Battery usable share | 80 percent | Cited for lithium batteries (Franco et al. 2017), at a cost in battery life |
 | Converter efficiency | 90 percent | Slightly optimistic at small loads (inverter idle draw) |
 | Charger | 200 W | Assumption; it must be able to refill the battery between outages |
+
+## How sure are the conclusions
+python uncertainty.py draws each input at random from its range and runs the model 2,000 times for a 2 kg baby (seed 2026, about 4 minutes). The full output is in docs/uncertainty_results.txt and the figure is docs/uncertainty.png. Ranges: heat loss 10 to 20 W/°C (triangular, peaking at the measured 14.8), baby heat production 1.9 to 2.8 W/kg, room 20 to 30 °C, heat stored 5 to 30 kJ/°C, heater 300 to 400 W, converter efficiency 80 to 95 percent, outage length lognormal with a median of 1.5 h limited to 0.25 to 11 h, and grid voltage 0.55 to 0.90 of nominal. The shapes of the heat-loss, room-temperature and outage-length ranges are my choices, so the results hold only given them.
+
+![Uncertainty analysis: battery per outage hour, coverage, and which inputs matter](docs/uncertainty.png)
+
+- Rated battery per outage hour (80 percent usable): median 172 Wh, and 90 percent of cases fall between 82 and 300 Wh.
+- Coverage, using the chosen outage lengths: a 500 Wh battery covers 76 percent of cases, 1,000 Wh covers 92 percent and 1,500 Wh covers 97 percent. Covering 95 percent takes about 1,205 Wh.
+- No backup, 2 h blackout: the median lowest core temperature is 31.5 °C (90 percent of cases between 28.1 and 34.4 °C). It falls below 32 °C in 58 percent of cases and below 36.5 °C in all of them.
+- Low voltage (grid at 0.55 to 0.90 of nominal for 6 h): no battery is needed in 83 percent of cases. When one is needed, the median rated size is 550 Wh and the 95th percentile is 1,256 Wh.
+- By birth weight, the median battery per outage hour is 219 Wh at 0.5 kg, 207 at 1 kg, 176 at 2 kg, 164 at 3 kg and 156 Wh at 4 kg.
+- Room temperature matters most: its rank correlation is -0.93 with the battery needed per hour and +0.98 with the no-backup baby temperature. Heat loss comes next (+0.36 with battery size, though its range is narrower), and the other inputs are 0.15 or less. At the measured heat loss, the battery per outage hour is 278 Wh in a 20 °C room, 237 at 22, 174 at 25, 113 at 28 and 73 Wh at 30 °C. The default 22 °C room is therefore a cold-ward case, and measured ward temperatures from the target hospitals would sharpen the results more than anything else.
+- These numbers come from re-running uncertainty.py, not from reproduce_findings.py, because the analysis takes minutes.
 
 ## Controller
 - Mains failure: switch to the battery at once. A real device can detect this directly (a commercial datasheet lists a power-failure alarm within 30 s).
@@ -64,14 +80,14 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - No heat exchange with cooling walls (about two thirds of a small baby's heat loss is radiant), which likely makes the baby cool too slowly in the model. The baby's own response to cold is left out, which likely makes it cool too fast. The net effect is unknown.
 - Evaporative heat loss and humidity are not modelled, and they matter a lot for babies under about 1 kg. The setpoints are for the first day of life; older babies need cooler air.
 - The fan stopping in a blackout, the fan and electronics load, battery ageing, short sags and surges, and clustered outages are not modelled. The heater is a fixed resistance and the fan and controller are assumed to keep running at low voltage.
-- Outage patterns are chosen from published ranges, not from one dataset. The outage and heat-loss inputs have not yet been varied together to show how sure the conclusions are.
+- Outage patterns are chosen from published ranges, not from one dataset. The ranges used in the uncertainty analysis (heat loss, room temperature, outage length) are my choices, centred on or spanning published values, so its results hold only given those choices.
 - Temperature classes (WHO: moderate hypothermia 32.0 to 35.9 °C, severe below 32.0 °C) are measured under the arm; the model gives core temperature, so comparisons are approximate.
 
 ## How the numbers changed
 The first version assumed a heat loss of 5 W/°C, which gave a rated battery of about 158 Wh for a 2 h blackout and a no-backup baby temperature of about 31 to 34 °C. A published measurement on a commercial incubator gives about three times that heat loss, which triples the battery sizes above. Those earlier figures were superseded and are kept only as the legacy test case in check_model.py.
 
 ## Next steps
-- Vary the heat loss, baby heat production and outage inputs across their published ranges and report how often each battery size protects the baby.
+- Replace the chosen room-temperature range with measured ward temperatures from the target hospitals, since room temperature matters most.
 - Find a measurement on a second incubator, and a measured fan and electronics load.
 - Test clustered outages and a second dataset of outage lengths.
 
