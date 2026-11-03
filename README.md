@@ -14,6 +14,7 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - Charger: for three 2 h blackouts a day, a 476 Wh battery works if the charger delivers 100 W or more. With a 60 W charger the battery cannot refill between blackouts and 814 Wh is needed. For 3 h blackouts the figures are 713 Wh with a 200 W charger and 2,566 Wh with 60 W.
 - Uncertainty: across 2,000 random cases drawn from the published ranges, the rated battery per outage hour has a median of 172 Wh (90 percent of cases between 82 and 300 Wh), and room temperature matters most. See the section on how sure the conclusions are.
 - Off-grid solar: running one incubator from solar alone for 10 years without a single hour off needs about 2 to 3 kWp and 8 to 17 kWh of battery at the five sites tested, and sizing from a typical year instead of the worst one leaves gaps. See the section on off-grid solar sizing.
+- Grid with outages plus solar: with a 200 W grid charger and moderate outages, adding 0.5 kWp of solar shrinks the battery by more than a third (Freetown: 5.8 to 3.6 kWh), and 1 kWp with 3.2 to 3.4 kWh keeps the incubator powered at all five sites.
 - Not validated: the heat loss comes from one device, and several other inputs rest on a single source or are assumptions (see the table below and PARAMETERS.md).
 
 ![Baby temperature in a 2 h blackout, with and without a 500 Wh battery](docs/blackout_example.png)
@@ -28,6 +29,7 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - make_figure.py: regenerates the example figure in docs/
 - uncertainty.py: varies the inputs across their ranges and saves docs/uncertainty.png and the results
 - solar.py, solar_sizing.py: off-grid solar sizing; get_solar_data.py downloads the PVGIS data into data/
+- grid_solar_sizing.py: grid with random outages plus solar
 - PARAMETERS.md: where each input comes from, the papers reviewed, and open issues
 
 ## How to run
@@ -38,6 +40,7 @@ Main results for the default incubator, a 2 kg baby and a 22 °C room. Inputs th
 - Regenerate the example figure: python make_figure.py
 - Run the uncertainty analysis (about 4 minutes): python uncertainty.py
 - Run the solar sizing: python solar_sizing.py (the data is already in data/; python get_solar_data.py downloads it again)
+- Run the grid plus solar sizing: python grid_solar_sizing.py
 
 ## Model (default settings)
 | Input | Value | Source or status |
@@ -65,7 +68,7 @@ python uncertainty.py draws each input at random from its range and runs the mod
 - Low voltage (grid at 0.55 to 0.90 of nominal for 6 h): no battery is needed in 83 percent of cases. When one is needed, the median rated size is 550 Wh and the 95th percentile is 1,256 Wh.
 - By birth weight, the median battery per outage hour is 219 Wh at 0.5 kg, 207 at 1 kg, 176 at 2 kg, 164 at 3 kg and 156 Wh at 4 kg.
 - Room temperature matters most: its rank correlation is -0.93 with the battery needed per hour and +0.98 with the no-backup baby temperature. Heat loss comes next (+0.36 with battery size, though its range is narrower), and the other inputs are 0.15 or less. At the measured heat loss, the battery per outage hour is 278 Wh in a 20 °C room, 237 at 22, 174 at 25, 113 at 28 and 73 Wh at 30 °C. The default 22 °C room is therefore a cold-ward case, and measured ward temperatures from the target hospitals would sharpen the results more than anything else.
-- These numbers come from re-running uncertainty.py, not from reproduce_findings.py, because the analysis takes minutes.
+- These numbers come from re-running uncertainty.py, not from reproduce_findings.py, because the analysis takes minutes. Every case is saved in docs/uncertainty_cases.csv, and the dashboard's third tab lets you pick a battery and a room-temperature range and see what share of the cases it covers.
 
 ## Off-grid solar sizing
 Several of the hospitals in the Sierra Leone sensor study run on solar panels and generators with no grid. For that case, solar_sizing.py asks how large a solar array and battery one incubator needs so that it never loses power. It uses 10 years (2014 to 2023) of measured hourly solar output from PVGIS (European Commission Joint Research Centre) for five sites, saved in data/ by get_solar_data.py. Each hour the incubator draws the heat it loses to the room through the converter (189 W, or 4.5 kWh a day, for the default incubator, a 2 kg baby and a 22 °C room); solar runs it first, any surplus charges the battery at 95 percent, and the battery covers the rest. The full output is in docs/solar_sizing_results.txt and the figure is docs/solar_sizing.png. The dashboard has a matching tab.
@@ -88,6 +91,18 @@ Smallest battery (rated, 80 percent usable) with no hour without power in 10 yea
 - The room matters here too. If the ward follows the outdoor air, the incubator draws less in Sierra Leone (118 to 129 W on average, outdoor air about 26 °C) but much more in Goma (240 W), where the outdoor air averages 18.9 °C at about 1,500 m altitude. With 2.5 kWp, Goma then needs 23.8 kWh instead of 9.5 kWh. Whether a ward follows the outdoor air is an assumption; measured ward temperatures were not found.
 - Data handling: the satellite record has gaps (hours at exactly zero at times of day that are almost never dark, mainly on 2 December 2014 and 16 October 2016 at the Sierra Leone sites). These hours, about 100 to 135 per site out of 87,648, are filled with the typical output for that month and hour. Without this step the night-time battery came out at 11.3 kWh instead of about 3.3.
 - Not included: the fan and electronics load (a slider in the dashboard), other equipment sharing the system, battery ageing, panel soiling beyond the PVGIS 14 percent system loss, and the baby's own heat (about 4 W), which the model does not pass to the incubator air, so the load is about 2 percent conservative. Real systems are normally oversized for these. Goma uses a fixed 10° tilt facing north, because PVGIS could not compute an optimal angle there; the other sites use the PVGIS optimal tilt.
+
+## Grid with outages, plus solar
+Most hospitals have a grid that fails several times a day. Then the grid runs the incubator when it is on, and between outages the grid charger and any solar array refill the battery. grid_solar_sizing.py combines the same 10 years of hourly solar data with random outages drawn from the published ranges: "moderate" (2 a day on average, median 1.5 h, about 4 h a day without grid power) and "severe" (3 a day, median 2 h, about 7 h a day), with lengths limited to 0.25 to 11 h as in the uncertainty analysis. Each hour is split into the outage part (solar first, then the battery) and the grid part, in that cautious order; for a fixed pattern of blackouts with no solar this agrees with the second-by-second model within 1 percent (check_model.py). Because the battery is set by the worst cluster of outages in 10 years, each case is repeated with 5 random outage draws. Full output: docs/grid_solar_results.txt.
+
+![Battery needed with grid outages, by grid charger and solar array size](docs/grid_solar.png)
+
+- A small array shrinks the battery a lot. In Freetown with moderate outages and a 200 W grid charger, the battery is 5.8 kWh with no solar, 3.6 kWh with 0.5 kWp (38 percent smaller) and 3.4 kWh with 1 kWp. With 0.5 kWp the five sites need 3.6 to 4.0 kWh, and with 1 kWp 3.2 to 3.4 kWh.
+- Beyond about 1 kWp more panels barely help, because the remaining battery covers the longest outages at night, when there is no sun.
+- Solar matters most when the charger is weak. With a 60 W charger the Freetown battery is 12.0 kWh without solar and 4.0 kWh with 0.5 kWp. With no grid charger at all (battery charged only from solar), 1 kWp needs 3.7 kWh.
+- Severe outages roughly double the battery without solar (11.8 kWh in Freetown with a 200 W charger); 1 kWp brings it down to 4.5 kWh.
+- So a grid-connected incubator needs a third to a half of the off-grid solar array (1 kWp against 2 to 3 kWp) and less than half the battery (3.2 to 3.4 kWh against 8 to 17 kWh).
+- Limits: the outages are random and spread evenly over the day and the year, and the same outage draws are used at every site. Real outages may cluster in the evening peak or in the dry season (when there is more sun), and low voltage without a full outage is not included in this part.
 
 ## Controller
 - Mains failure: switch to the battery at once. A real device can detect this directly (a commercial datasheet lists a power-failure alarm within 30 s).
@@ -114,8 +129,7 @@ The first version assumed a heat loss of 5 W/°C, which gave a rated battery of 
 ## Next steps
 - Replace the chosen room-temperature range with measured ward temperatures from the target hospitals, since room temperature matters most.
 - Find a measurement on a second incubator, and a measured fan and electronics load.
-- Test clustered outages and a second dataset of outage lengths.
-- Size solar for grid-connected hospitals with outages, where solar only has to refill the battery between them.
+- Test clustered outages, evening-peak and dry-season outage patterns, and a second dataset of outage lengths.
 
 ## Author
 Alusine Bah

@@ -84,6 +84,20 @@ def run(s, kg, workers, light=False):
     return np.array(out)
 
 
+CASES_FILE = "docs/uncertainty_cases.csv"
+CASE_COLUMNS = ("heat_loss", "baby_heat", "room", "heat_stored", "heater", "efficiency", "outage_hours", "grid_voltage")
+
+
+def save_cases(s, res, path=CASES_FILE):
+    """One row per random case: its inputs and results, for the dashboard."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="ascii", newline="\n") as f:
+        f.write(",".join(CASE_COLUMNS) + ",battery_per_outage_hour_wh,lowest_core_2h_no_backup_c,battery_6h_low_voltage_wh\n")
+        for i in range(len(s["heat_loss"])):
+            vals = [s[k][i] for k in CASE_COLUMNS] + [res[i, 0], res[i, 1], res[i, 2]]
+            f.write(",".join(f"{v:.4f}" for v in vals) + "\n")
+
+
 def main():
     t0 = time.time()
     workers = max(1, (os.cpu_count() or 2) - 1)
@@ -91,6 +105,7 @@ def main():
     s = draw(rng, N)
     res = run(s, 2.0, workers)
     per_hour, cold2, brown_need, cold6 = res.T
+    save_cases(s, res)
 
     print("Inputs varied (all other inputs at their defaults; 2 kg baby):")
     for k, v in RANGES.items():

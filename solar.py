@@ -72,6 +72,71 @@ def usable_storage_needed_wh(pv_w, load_w, charge_efficiency):
     return worst
 
 
+def storage_from_gains(gains):
+    """Smallest usable battery (Wh) that never runs empty, starting full, for a sequence of energy gains (Wh)."""
+    deficit = 0.0
+    worst = 0.0
+    for g in np.asarray(gains, dtype=float).tolist():
+        deficit -= g
+        if deficit < 0.0:
+            deficit = 0.0
+        elif deficit > worst:
+            worst = deficit
+    return worst
+
+
+def run_gains(gains, usable_wh):
+    """Battery charge after each step and the energy each step could not supply, for a given usable battery."""
+    soc = usable_wh
+    g = np.asarray(gains, dtype=float)
+    charge = np.empty(len(g))
+    unmet = np.zeros(len(g))
+    for i, x in enumerate(g.tolist()):
+        soc += x
+        if soc > usable_wh:
+            soc = usable_wh
+        elif soc < 0.0:
+            unmet[i] = -soc
+            soc = 0.0
+        charge[i] = soc
+    return charge, unmet
+
+
+def outage_fraction(n_hours, per_day, median_h, sigma=0.9, min_h=0.25, max_h=11.0, seed=2026):
+    """Share of each hour without grid power, from random outages.
+
+    Outage starts are random in time (on average per_day a day); lengths are lognormal with the
+    given median, limited to min_h to max_h, as in uncertainty.py. Overlapping outages merge.
+    Resolution one minute. Seeded, so the same settings always give the same outages.
+    """
+    rng = np.random.default_rng(seed)
+    minutes = n_hours * 60
+    off = np.zeros(minutes, dtype=bool)
+    t = rng.exponential(24.0 / per_day) if per_day > 0 else n_hours
+    while t < n_hours:
+        length = float(np.clip(rng.lognormal(np.log(median_h), sigma), min_h, max_h))
+        a = int(t * 60)
+        off[a:min(minutes, a + int(round(length * 60)))] = True
+        t += rng.exponential(24.0 / per_day)
+    return off.reshape(n_hours, 60).mean(axis=1)
+
+
+def grid_gains(pv_w, load_w, outage, charger_w, converter_efficiency, charge_efficiency):
+    """Battery energy gains (Wh) in two steps per hour: the outage part first, then the grid part.
+
+    Outage part: solar runs the incubator, any surplus charges the battery, the battery covers the rest.
+    Grid part: the grid runs the incubator, and the grid charger and the solar both charge the battery.
+    Putting the outage first in each hour is the cautious order.
+    """
+    pv = np.asarray(pv_w, dtype=float)
+    load = np.broadcast_to(np.asarray(load_w, dtype=float), pv.shape)
+    o = np.asarray(outage, dtype=float)
+    net = (pv - load) * o
+    out_part = np.where(net > 0, net * charge_efficiency, net)
+    grid_part = (charger_w * converter_efficiency + pv * charge_efficiency) * (1.0 - o)
+    return np.column_stack([out_part, grid_part]).ravel()
+
+
 def run_hourly(pv_w, load_w, usable_wh, charge_efficiency):
     """Hour-by-hour battery charge (Wh) and unmet load (Wh) for a given usable battery."""
     pv = np.asarray(pv_w, dtype=float)

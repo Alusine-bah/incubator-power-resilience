@@ -137,3 +137,9 @@ Status: CITED = a published value supports it; DERIVED = our arithmetic from pub
 - Hourly load: heat loss x (setpoint - room) / converter efficiency, as in model.py (agrees with the second-by-second model within 1 percent; check_model.py). Charging efficiency 95 percent (assumption). Fan and electronics load 0 W by default (not measured).
 - Battery: smallest usable capacity that never runs empty over the record, starting full, then divided by 0.8 usable. One pass over the record (deepest cumulative drawdown).
 - Room following the outdoor air uses PVGIS 2 m air temperature; this is an assumption for an unconditioned ward.
+
+
+## Grid with outages plus solar inputs (python grid_solar_sizing.py)
+- Outages: random start times (exponential gaps, average 2 or 3 a day), lognormal lengths with median 1.5 or 2 h and sigma 0.9, limited to 0.25 to 11 h (as in uncertainty.py), merged where they overlap, one-minute resolution. Seeds 2026 to 2030; the dashboard uses seed 2026. The same draws are used at every site. Rates and lengths chosen to sit inside the Sierra Leone (0.6 to 3.1 outages a day) and North Kivu (median outage 2.0 h) ranges; my choice.
+- Each hour: outage share first (solar, then battery; surplus charges at 95 percent), then grid share (grid charger x 90 percent converter plus solar x 95 percent into the battery). Check against the detailed model with repeated 2 h blackouts and no solar: 473 vs 476 Wh (200 W charger), 812 vs 814 Wh (60 W).
+- Dashboard: docs/uncertainty_cases.csv holds the inputs and results of the 2,000 uncertainty cases (written by uncertainty.py).

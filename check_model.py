@@ -99,5 +99,18 @@ pvt[(day == 9) & (np.arange(len(st)) % 24 >= 12)] = 0.0       # half a day of ze
 m = missing_hours(st, pvt, max_zero_share=0.05)
 check("data gaps: only the 5 zero daytime hours of the half-day gap are flagged", float(m.sum()), 5.0, 0.0)
 check("data gaps: filled with the typical output for that hour (W)", float(fill_missing(st, pvt, m)[m].mean()), 400.0, 0.01)
+from solar import grid_gains, outage_fraction, storage_from_gains
+print()
+print("--- Grid with outages plus solar (solar.py) ---")
+for ch, want in ((200.0, 476.0), (60.0, 814.0)):
+    o = np.zeros(48)
+    for a, l, _ in repeated_outages(2.0):
+        o[int(a):int(a + l)] = 1.0
+    hourly = storage_from_gains(grid_gains(np.zeros(48), battery_side_load_w(d, d.room_c), o, ch, d.efficiency, 0.95)) / 0.8
+    check(f"repeated 2 h blackouts, {ch:.0f} W charger, no solar: hourly battery matches the detailed model (Wh)",
+          hourly, want, round(want * 0.02))
+o = outage_fraction(87648, 2.0, 1.5, seed=2026)
+check_between("random outages, 2 a day, median 1.5 h: hours a day without grid power", o.sum() / (87648 / 24.0), 3.0, 5.0)
+check("random outages are repeatable (same seed, same outages)", float(np.abs(o - outage_fraction(87648, 2.0, 1.5, seed=2026)).sum()), 0.0, 0.0)
 print()
 print("All checks passed." if all(results) else "Some checks failed. Paste this output here.")
