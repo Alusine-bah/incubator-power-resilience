@@ -73,4 +73,31 @@ for kg in (0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0):
     check_between(f"{kg} kg: calibrated hA (W/C)", q.ha, 7.0 * area * 0.85, 9.8 * area * 1.15)
 
 print()
+print("--- Solar sizing (solar.py): hourly load and battery maths ---")
+import numpy as np
+from solar import SolarSetup, battery_side_load_w, usable_storage_needed_wh, run_hourly
+for label, q in (("2 kg, room 22", Params()), ("0.5 kg, room 22", Params(baby_mass_kg=0.5)),
+                 ("2 kg, room 28", Params(room_c=28.0))):
+    r = simulate(q, grid_profile([(0.5, 8.0, 0.0)], 9.0), 1000000)
+    per_hour = (r["charge"][int(3.5 * 3600)] - r["charge"][int(7.5 * 3600)]) / 4.0
+    check(f"{label}: hourly load matches the second-by-second model (W)",
+          float(battery_side_load_w(q, q.room_c)), per_hour, round(per_hour * 0.01, 1))
+pv = np.array([0, 0, 300, 300, 0, 0], dtype=float)
+need = usable_storage_needed_wh(pv, 100.0, 0.5)
+check("battery maths: 2 dark hours, 2 sunny hours (+100 Wh stored each), 2 dark hours (Wh)", need, 200.0, 0.01)
+charge, unmet = run_hourly(pv, 100.0, need, 0.5)
+check("battery maths: that battery never runs empty (Wh unmet)", float(unmet.sum()), 0.0, 0.001)
+charge, unmet = run_hourly(pv, 100.0, need - 50.0, 0.5)
+check("battery maths: 50 Wh smaller runs 50 Wh short in each of the two dark spells", float(unmet.sum()), 100.0, 0.01)
+from solar import missing_hours, fill_missing
+st = np.array([f"2020{m:02d}{d:02d}{h:02d}" for m in (1,) for d in range(1, 29) for h in range(24)])
+day = np.arange(len(st)) // 24
+pvt = np.tile(np.array([0.0] * 7 + [400.0] * 10 + [0.0] * 7), 28)
+pvt[(np.arange(len(st)) % 24) == 7] = 0.0                    # an hour that is always dark: real
+pvt[day == 6] = 30.0                                           # a very dull day: real
+pvt[(day == 9) & (np.arange(len(st)) % 24 >= 12)] = 0.0       # half a day of zeros: missing
+m = missing_hours(st, pvt, max_zero_share=0.05)
+check("data gaps: only the 5 zero daytime hours of the half-day gap are flagged", float(m.sum()), 5.0, 0.0)
+check("data gaps: filled with the typical output for that hour (W)", float(fill_missing(st, pvt, m)[m].mean()), 400.0, 0.01)
+print()
 print("All checks passed." if all(results) else "Some checks failed. Paste this output here.")

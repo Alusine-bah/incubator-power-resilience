@@ -1,0 +1,80 @@
+Off-grid incubator: solar array and battery sizing
+Incubator: heat loss 14.8 W/C, heater 350 W, 2 kg baby, air setpoint 33.5 C.
+Room fixed at 22 C: incubator draws 189 W from the solar side, 4.54 kWh per day (converter 90%, charging 95%).
+Battery sizes are rated capacity at 80% usable, for no hour without power in the whole record.
+Solar data: PVGIS hourly output of a 1 kWp array at the optimal tilt, after 14 percent system losses.
+
+== Freetown, Sierra Leone (2014-2023, 10 years) ==
+   satellite gaps filled: 101 hours (longest run 10 hours; days with 8 or more missing hours: 2014-12-02, 2016-10-16)
+   solar yield: 1489 kWh per kWp per year; worst month Jul 2.74, best Feb 5.14 kWh per kWp per day
+   room follows outdoor air: mean outdoor 25.9 C, incubator draws 125 W on average
+   array (kWp) | battery, room 22 C: whole record (typical single year) | battery, room = outdoor air
+         1.0   | 2689.8 kWh = 593 days of use, impractical (312.8 kWh)  |  116.1 kWh = 39 days of use, impractical
+         1.5   |   88.8 kWh = 20 days of use, impractical (53.8 kWh)  |   23.6 kWh = 8 days of use, impractical
+         2.0   |   20.6 kWh (11.2 kWh)  |   13.1 kWh
+         2.5   |   12.8 kWh (9.2 kWh)  |    8.1 kWh
+         3.0   |   10.5 kWh (7.6 kWh)  |    7.4 kWh
+         4.0   |    9.1 kWh (6.4 kWh)  |    6.0 kWh
+         6.0   |    6.3 kWh (5.0 kWh)  |    4.2 kWh
+   night-time floor (very large array): 3.3 kWh
+
+== Bonthe, Sierra Leone (2014-2023, 10 years) ==
+   satellite gaps filled: 107 hours (longest run 10 hours; days with 8 or more missing hours: 2014-12-02, 2016-10-16)
+   solar yield: 1419 kWh per kWp per year; worst month Jul 2.56, best Feb 4.89 kWh per kWp per day
+   room follows outdoor air: mean outdoor 26.3 C, incubator draws 118 W on average
+   array (kWp) | battery, room 22 C: whole record (typical single year) | battery, room = outdoor air
+         1.0   | 3499.7 kWh = 771 days of use, impractical (376.6 kWh)  |  110.4 kWh = 39 days of use, impractical
+         1.5   |  112.4 kWh = 25 days of use, impractical (73.5 kWh)  |   20.5 kWh = 7 days of use, impractical
+         2.0   |   26.1 kWh (15.5 kWh)  |    9.9 kWh
+         2.5   |   15.2 kWh (9.9 kWh)  |    7.4 kWh
+         3.0   |   10.9 kWh (8.1 kWh)  |    6.4 kWh
+         4.0   |    7.8 kWh (6.6 kWh)  |    5.0 kWh
+         6.0   |    5.6 kWh (4.8 kWh)  |    4.0 kWh
+   night-time floor (very large array): 3.3 kWh
+
+== Kabala, Sierra Leone (2014-2023, 10 years) ==
+   satellite gaps filled: 121 hours (longest run 11 hours; days with 8 or more missing hours: 2014-12-02, 2016-10-16)
+   solar yield: 1570 kWh per kWp per year; worst month Jul 3.40, best Feb 5.05 kWh per kWp per day
+   room follows outdoor air: mean outdoor 25.7 C, incubator draws 129 W on average
+   array (kWp) | battery, room 22 C: whole record (typical single year) | battery, room = outdoor air
+         1.0   | 1712.9 kWh = 377 days of use, impractical (212.3 kWh)  |  111.1 kWh = 36 days of use, impractical
+         1.5   |   14.6 kWh (8.7 kWh)  |    9.0 kWh
+         2.0   |    8.0 kWh (6.2 kWh)  |    7.8 kWh
+         2.5   |    7.0 kWh (5.4 kWh)  |    7.3 kWh
+         3.0   |    6.6 kWh (4.7 kWh)  |    6.9 kWh
+         4.0   |    5.8 kWh (3.5 kWh)  |    6.1 kWh
+         6.0   |    4.3 kWh (3.4 kWh)  |    4.6 kWh
+   night-time floor (very large array): 3.3 kWh
+
+== Goma, North Kivu, DR Congo (2014-2023, 10 years) ==
+   satellite gaps filled: 134 hours (longest run 11 hours; days with 8 or more missing hours: 2016-10-16, 2016-10-17)
+   solar yield: 1286 kWh per kWp per year; worst month Nov 3.13, best Jul 4.10 kWh per kWp per day
+   room follows outdoor air: mean outdoor 18.9 C, incubator draws 240 W on average
+   array (kWp) | battery, room 22 C: whole record (typical single year) | battery, room = outdoor air
+         1.0   | 5058.0 kWh = 1114 days of use, impractical (512.4 kWh)  | 10643.5 kWh = 1845 days of use, impractical
+         1.5   |   52.1 kWh = 11 days of use, impractical (23.2 kWh)  | 2963.3 kWh = 514 days of use, impractical
+         2.0   |   16.4 kWh (9.0 kWh)  |   46.2 kWh = 8 days of use, impractical
+         2.5   |    9.5 kWh (6.9 kWh)  |   23.8 kWh
+         3.0   |    7.6 kWh (6.1 kWh)  |   16.4 kWh
+         4.0   |    6.9 kWh (5.1 kWh)  |   11.9 kWh
+         6.0   |    5.6 kWh (3.5 kWh)  |    9.2 kWh
+   night-time floor (very large array): 3.1 kWh
+
+== Dhaka, Bangladesh (2014-2023, 10 years) ==
+   satellite gaps filled: 11 hours (longest run 1 hours)
+   solar yield: 1369 kWh per kWp per year; worst month Jul 2.68, best Feb 4.77 kWh per kWp per day
+   room follows outdoor air: mean outdoor 25.4 C, incubator draws 133 W on average
+   array (kWp) | battery, room 22 C: whole record (typical single year) | battery, room = outdoor air
+         1.0   | 4072.3 kWh = 897 days of use, impractical (420.0 kWh)  |  194.3 kWh = 61 days of use, impractical
+         1.5   |  141.1 kWh = 31 days of use, impractical (75.5 kWh)  |   24.6 kWh = 8 days of use, impractical
+         2.0   |   46.5 kWh = 10 days of use, impractical (18.6 kWh)  |   22.0 kWh
+         2.5   |   24.4 kWh (15.7 kWh)  |   20.4 kWh
+         3.0   |   16.7 kWh (13.3 kWh)  |   18.9 kWh
+         4.0   |   13.7 kWh (10.2 kWh)  |   15.9 kWh
+         6.0   |   10.3 kWh (7.7 kWh)  |   12.1 kWh
+   night-time floor (very large array): 3.7 kWh
+
+Worst week, Freetown, Sierra Leone, 2.5 kWp with a 12.8 kWh battery: lowest charge on 2014-08-15; hours without power in the whole record: 0
+   with a battery 25 percent smaller (9.6 kWh): 33 hours without power on 5 days in 10 years
+
+Saved docs/solar_sizing.png (41 s)

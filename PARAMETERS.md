@@ -128,3 +128,12 @@ Status: CITED = a published value supports it; DERIVED = our arithmetic from pub
 - Outage length: lognormal, median 1.5 h, sigma 0.9, limited to 0.25 to 11 h. My choice, to span the Sierra Leone and DR Congo ranges; coverage figures depend on it.
 - Grid voltage 0.55 to 0.90 of nominal (Sierra Leone sensor range).
 - Result: median rated battery 172 Wh per outage hour (90 percent of cases 82 to 300); room temperature rank correlation -0.93. Full output in docs/uncertainty_results.txt (seed 2026; the same numbers appeared on two computers).
+
+
+## Off-grid solar sizing inputs (python solar_sizing.py)
+- Solar output: PVGIS 5.3 hourly seriescalc, 2014 to 2023, 1 kWp crystalline silicon, free-standing, PVGIS default 14 percent system loss. Optimal tilt from PVGIS, except Goma (fixed 10 degrees facing north; the optimal-angle request returned a server error). Radiation database PVGIS-SARAH3 (satellite) for the African sites and PVGIS-ERA5 (reanalysis) for Dhaka. Files in data/ record the request URL.
+- Sites: Freetown (8.484, -13.234), Bonthe (7.526, -12.505), Kabala (9.589, -11.553), Goma (-1.650, 29.230), Dhaka (23.810, 90.412).
+- Satellite gaps: an hour is treated as missing when it is exactly zero and that hour of the day, in that calendar month, is zero in under 2 percent of the record. Missing hours are filled with the median of the same month and hour. About 100 to 135 hours per African site, 11 at Dhaka.
+- Hourly load: heat loss x (setpoint - room) / converter efficiency, as in model.py (agrees with the second-by-second model within 1 percent; check_model.py). Charging efficiency 95 percent (assumption). Fan and electronics load 0 W by default (not measured).
+- Battery: smallest usable capacity that never runs empty over the record, starting full, then divided by 0.8 usable. One pass over the record (deepest cumulative drawdown).
+- Room following the outdoor air uses PVGIS 2 m air temperature; this is an assumption for an unconditioned ward.
