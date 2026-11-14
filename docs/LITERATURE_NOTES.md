@@ -154,3 +154,29 @@ Both apply only when the incubator walls are as warm as the air and the air has 
 - Wet season only. The report says the data "is only representative of PQR for the wet season months of July and August"; the main hydro plant gives 40 to 50 MW in the wet season but only 10 to 15 MW in the dry season, so dry-season outages may be worse.
 - "Poverty outages" (a facility unable to pay for grid power or fuel) were removed. At Waterloo CHC the real situation was 24 hours a day without power from 28 July, against the 6.63 h a day in the results.
 - Grey literature: a report, not peer-reviewed. For key numbers we pair it with Miles et al. (2025).
+
+## 7. World Health Organization (1997)
+
+**Citation:** World Health Organization (1997). *Thermal Protection of the Newborn: A Practical Guide.* WHO/RHT/MSM/97.2. Geneva: WHO. Free online.
+
+**Checked:** 2026-11-15, against the PDF.
+
+**What it is:** WHO's practical guide on keeping newborns warm: definitions of hypothermia, how to measure temperature, how to rewarm, and the use of incubators and other warming methods.
+
+**What it confirms for this project (the temperature classes in our README):**
+
+| Baby's temperature | WHO class | WHO wording |
+| --- | --- | --- |
+| 36.5 to 37.5 °C | Normal | "normal body temperature of 36.5—37.5°C" |
+| 36.0 to 36.4 °C | Cold stress (mild hypothermia) | "Cause for concern" |
+| 32.0 to 35.9 °C | Moderate hypothermia | "Danger, warm baby" |
+| Below 32 °C | Severe hypothermia | "Outlook grave, skilled care urgently" |
+
+**Correction made:** an older line in PARAMETERS.md described WHO cold stress as 36.0 to 32.0 °C. That was wrong; cold stress is 36.0 to 36.4 °C, and 32.0 to 35.9 °C is moderate hypothermia.
+
+**Other points useful for the project:**
+- Why it matters: the guide states that "hypothermia, even if moderate, is associated with an increased risk of death in low birth weight newborns".
+- Measurement: WHO prefers axillary (under-arm) temperature for routine checks and rectal temperature when hypothermia is suspected, because it is closer to core temperature. Our model gives core temperature, so comparisons with these classes are approximate (the README already says this).
+- Room temperature: "If the room temperature is below 25°C (77°F), it is often impossible to compensate for radiant heat loss by increasing the air temperature inside the incubator." Our model does not include radiant loss to cold incubator walls, so at our default 22 °C room it may be optimistic about how warm the baby stays. This supports the finding that room temperature matters most, and it is a limitation to state.
+
+**Limits to remember:** a practical guide from 1997, not a research study; the classes are clinical conventions based on axillary or rectal temperature.

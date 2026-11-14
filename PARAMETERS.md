@@ -25,7 +25,7 @@ Status key: ASSUMPTION = chosen by us, not yet validated. CHECKED = consistent w
 
 ## Delanaud et al. 2019 (Appl. Sci. 9(8), 1541, doi 10.3390/app9081541)
 - Review paper. Gives heat balance structure: S = M +/- R - E - Eresp +/- C +/- Cresp +/- K. Our baby model is a single lumped term, a simplification.
-- Optimal core temperature 36.5 to 37.5 °C. WHO cold stress described as core 36.0 to 32.0 °C. Our README labels (moderate/severe hypothermia) come from memory and must be checked against WHO 1997 "Thermal Protection of the Newborn".
+- Optimal core temperature 36.5 to 37.5 °C. WHO cold stress described as core 36.0 to 32.0 °C. Checked against WHO 1997 "Thermal Protection of the Newborn" (2026-11-15): normal 36.5 to 37.5 °C; cold stress (mild hypothermia) 36.0 to 36.4 °C; moderate hypothermia 32.0 to 35.9 °C; severe below 32 °C. The README labels match. The earlier phrase "cold stress 36.0 to 32.0 °C" above was wrong: cold stress is 36.0 to 36.4 °C only. See docs/LITERATURE_NOTES.md, entry 7.
 - Mean radiant temperature in single-wall incubators reported 2.7 to 5.5 °C below air temperature. Our model ignores radiant exchange with the walls, so it probably under-estimates cooling in a blackout (LIMITATION).
 - Wheldon (3.3 kg mannequin, via Delanaud): hc 3.9 to 4.9, hr 3.1 to 4.9 W/m2/°C. Total 7 to 9.8 W/m2/°C. Needs skin area of a 2 kg preterm baby to convert to hA (not yet sourced).
 - Metabolic heat: not given in this paper. A later Delanaud paper (Appl. Sci. 2023, 13(7), 4412) mentions 2.70 W/kg in one scenario, not yet read. Our 3 W for 2 kg (1.5 W/kg) may be low.
