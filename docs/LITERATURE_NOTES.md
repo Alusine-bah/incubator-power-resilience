@@ -75,3 +75,33 @@ Conversion: 1 kcal/kg/day = 4184 J / 86,400 s = 0.0484 W/kg.
 **Reading:** our model keeps the baby in a neutral incubator, so the first four rows apply: 1.7 to 2.7 W/kg. Our range of 1.9 to 2.8 W/kg sits inside or just above that, and our default 2.0 W/kg is close to the total for breast-fed infants (2.14). The last two rows show that a baby in a cooler environment produces more heat, which our model does not include.
 
 **Limits to remember:** a small study (23 infants), from Hungary in the 1960s, using the measuring methods of the time; all infants weighed 1100 g or more, so values for 500 to 1000 g babies are an extrapolation.
+
+## 4. Sauer, Dane and Visser (1984)
+
+**Citation:** Sauer, P. J. J., Dane, H. J., Visser, H. K. A. (1984). New standards for neutral thermal environment of healthy very low birthweight infants in week one of life. *Archives of Disease in Childhood*, 59(1), 18-22. Free on PubMed Central (PMC1628424).
+
+**Checked:** 2026-11-15, against the PDF from PubMed Central.
+
+**What the paper is about:** the incubator temperature at which a preterm baby keeps a core temperature of 36.7 to 37.3 °C without warming or cooling (the "neutral temperature"). 25 studies in 14 infants in the first week (29 to 34 weeks' gestation), and 78 measurements in 27 infants after the first week (birth weight 0.81 to 1.85 kg).
+
+**The two equations it gives:**
+
+- First week: neutral temperature = 36.6 - 0.34 x (gestational age - 30 weeks) - 0.28 x age in days. Standard deviation 0.7 °C.
+- After the first week: neutral temperature = 36 - 1.4 x weight in kg - 0.03 x age in days. Standard deviation 0.65 °C.
+
+Both apply only when the incubator walls are as warm as the air and the air has a dew point of 18 °C. With cooler walls the air must be warmer (neutral = 0.4 x air + 0.6 x wall); with more humid air the neutral temperature is lower.
+
+**Compared with our setpoints (from hospital guidelines):**
+
+| Case | Sauer et al. | Our model |
+| --- | --- | --- |
+| 1 kg, day 7 | 34.4 °C | 34.9 °C |
+| 2 kg, day 7 | 33.0 °C | 33.5 °C |
+| 33 weeks' gestation, day 1 | 35.3 °C | 33.5 °C (if about 2 kg) |
+| 33 weeks' gestation, day 7 | 33.6 °C | 33.5 °C |
+
+(Values in the Sauer column are our arithmetic from the equations.)
+
+**Reading:** after the first week our setpoints agree with Sauer within about 0.5 °C, inside the paper's own scatter. In the first few days Sauer gives higher values, up to about 2 °C higher. A higher setpoint means more heat loss: at a 22 °C room, 35.0 °C instead of 33.5 °C raises the heater's steady load by about 13 percent (our arithmetic). So for babies in their first days, our battery sizes may be somewhat low. This is a possible model change to discuss at the build stage; nothing has been changed yet.
+
+**Limits to remember:** small study from the Netherlands; healthy infants only; values above 2 kg are extrapolated; test conditions (equal wall and air temperature, dew point 18 °C) differ from most real incubators.
