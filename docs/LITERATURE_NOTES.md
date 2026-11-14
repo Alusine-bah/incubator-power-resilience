@@ -321,6 +321,32 @@ Direct sunlight (SID, DNI) is less accurate (daily RMSE 24.1 and 43.2 W/m²).
 | Children and newborns | Mortality fell in all wards, but significantly only in paediatric wards ("which includes neonatal mortality") and internal medicine |
 | Other effects | 17 percent more outpatients and more days worked by nurses |
 
-**How we will use it:** in the introduction, as the strongest evidence that unreliable power harms patients. The 22 hours a day threshold also matches the World Health Organization's definition of reliable electricity (less than 2 hours of outage a day), which the authors use.
+**How we will use it:** in the introduction, as the strongest evidence that unreliable power harms patients. The authors say their 22 hours a day threshold follows the WHO definition of reliable electricity (less than 2 hours of outage). The WHO survey definition is slightly different: no outage lasting more than two hours at a time in the previous one or two weeks (see entry 13).
 
 **Limits to remember:** the main reliability measure comes from a one-time survey, while sensors show reliability changes a lot over time; the sensor analysis covers only 18 facilities; the effect is for whole facilities, not for incubators or newborns specifically; one country.
+
+## 13. WHO, World Bank, IRENA and SEforALL (2023)
+
+**Citation:** World Health Organization, World Bank, International Renewable Energy Agency, Sustainable Energy for All (2023). *Energizing Health: Accelerating Electricity Access in Health-Care Facilities.* Geneva: WHO. ISBN 978-92-4-006696-0. Free online. A report, not a peer-reviewed paper.
+
+**Checked:** 2026-11-15, against the PDF (only the parts listed below).
+
+**What it is:** the main global report on electricity in health facilities, based on national surveys from 27 low- and lower-middle-income countries (2015 to 2022).
+
+**What it gives this project:**
+
+| Point | What the report says |
+| --- | --- |
+| Scale of the problem | "close to 1 billion people in low- and lower-middle-income countries are served by health-care facilities without reliable electricity access or with no electricity access at all" |
+| No electricity at all | About 12 percent of facilities in South Asia and 15 percent in sub-Saharan Africa |
+| Reliable electricity | Only 40 percent of facilities in sub-Saharan Africa had reliable electricity; only half of hospitals there |
+| Incubators need it | "Without an adequate and reliable source of power, some medical devices and services such as fetal heart monitors, incubators and ventilators cannot operate." |
+| Critical loads | Baby warmers, oxygen concentrators and refrigerators are "critical loads" that must stay powered; lights and fans should not drain the power they need |
+| Equipment failure | "Nearly a third of failures of medical devices globally was estimated to be caused by unreliable electricity supply" |
+| Definition of reliable | A facility counts as reliable if it answers "no" to: "At any time in the previous one (or two) weeks, have you experienced an outage lasting more than two hours at a time?" |
+
+**Second-hand items (cite the originals, not this report):** Apenteng et al. (2018) in Ghana, risk of death up 43 percent for each day the power was out for more than 2 hours; Duke et al. (2021), 40 percent lower paediatric mortality with reliable solar power and oxygen in Papua New Guinea.
+
+**How we will use it:** the opening of the introduction (scale of the problem, incubators as critical equipment) and the definition of reliable electricity.
+
+**Limits to remember:** survey-based (facilities report their own outages); the reliability question covers only one or two weeks; regional averages, not specific to neonatal units.
