@@ -373,3 +373,32 @@ Direct sunlight (SID, DNI) is less accurate (daily RMSE 24.1 and 43.2 W/m²).
 **Why it matters for us:** it is the closest example we have found of a battery sized for an incubator, and the size was chosen by a simple run-time rule with no outage data, no heat model and no test. It supports our novelty claim: sizing backup from measured outages and a heat-balance model has not been done in these designs.
 
 **Limits to remember:** a preprint, not peer-reviewed; a prototype with a different heat source (LEDs) and housing from a commercial incubator, so its power needs are not comparable to ours.
+
+## 15. Moner-Girona et al. (2021)
+
+**Citation:** Moner-Girona, M., Kakoulaki, G., Falchetta, G., Weiss, D. J., Taylor, N. (2021). Achieving universal electrification of rural healthcare facilities in sub-Saharan Africa with decentralized renewable energy technologies. *Joule*, 5, 2687-2714. https://doi.org/10.1016/j.joule.2021.09.010 (Open access.)
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** a map-based study of rural health facilities in sub-Saharan Africa without electricity, with an optimised solar PV and battery system sized for each of 122,899 facilities using hourly satellite solar data (the PVGIS approach), and the total cost.
+
+**Key findings:**
+- Over 50,000 rural health facilities in sub-Saharan Africa lack electricity; electrifying them with PV and batteries would cost just under EUR 500 million.
+- Electricity demand by facility type (WHO tiers): primary health post 1,825 kWh a year; first hospital 7,300; secondary hospital 14,600; tertiary hospital 91,250.
+- For a primary health post (1,825 kWh a year), the optimised system is 1.2 to 2.8 kWp of PV and 2.4 to 7 kWh of battery, depending on location.
+- Reliability target: "a power outage on less than 5% of days in a year".
+
+**Comparison with our project (our arithmetic):**
+
+| | Moner-Girona et al. (2021) | Our project |
+| --- | --- | --- |
+| What is powered | A whole facility, from a standard demand tier | One incubator, from a heat-balance model |
+| Daily energy | Primary health post: 1,825 / 365 = 5.0 kWh a day | One incubator (2 kg baby, 22 °C room): 4.5 kWh a day |
+| Reliability target | Outage allowed on up to 5 percent of days (about 18 days a year) | No hour without power in 10 years |
+| Result | 1.2 to 2.8 kWp, 2.4 to 7 kWh | 2 to 3 kWp, 8 to 17 kWh (off-grid) |
+
+**Two points for our paper:**
+1. One incubator uses about as much energy (4.5 kWh a day) as the whole assumed demand of a primary health post (5.0 kWh a day). A facility sized from standard tiers could be drained by a single incubator.
+2. A target that allows outages on 5 percent of days is reasonable for a facility on average, but not for an incubator, where a few hours without power can cause severe hypothermia. That is why our zero-outage target gives larger batteries for similar daily energy.
+
+**Limits to remember:** a continental planning study; demand tiers are standard assumptions, not measurements; no specific medical devices are modelled.
