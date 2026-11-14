@@ -210,3 +210,26 @@ Both apply only when the incubator walls are as warm as the air and the air has 
 **Ideas we could use later:** reporting reliability as LPSP (the standard measure) as well as "hours without power"; Weibull or Markov outage models as an alternative to our lognormal outage lengths; adding cost.
 
 **Limits to remember:** one building in one city; a university building load, not medical equipment.
+
+## 9. Rincon Casado et al. (2021)
+
+**Citation:** Rincon Casado, A., Larrode-Diaz, M., Fernandez Zacarias, F., Hernandez Molina, R. (2021). Experimental and computational model for a neonatal incubator with thermoelectric conditioning system. *Energies*, 14(17), 5278. https://doi.org/10.3390/en14175278 (Open access.)
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** a commercial incubator (Ohio Care Plus 3000) fitted with a thermoelectric (Peltier) heater, a simple node-and-resistance thermal model of it (air, mattress surface and heater chamber; no baby), and tests in a temperature-controlled room to measure the model's resistances and check the model against measurements.
+
+**Note on Simon et al. (1994):** we hoped to cite the classic Simon, Reddy and Kantak (1994) model through this paper, but this paper does not cite it. Simon et al. is behind a paywall; it stays on the list of papers to obtain.
+
+**What it gives this project:**
+
+| Point | What the paper says | Use for us |
+| --- | --- | --- |
+| Heat loss of a second incubator | Air-to-room thermal resistance 0.077 K/W on average (0.043 to 0.116 in three tests), room at 28 °C (Table 5) | 1 / 0.077 = about 13 W/°C (range 9 to 23 W/°C; our arithmetic). Close to our 14.8 W/°C from a different incubator, so our value is not an outlier |
+| A validated model | Model temperatures within about 1.5 °C of measurements; largest errors during heating and cooling (Table 7) | An example of how our model should be validated |
+| Switch-off behaviour | After switch-off "the computational model cools down more slowly than the experimental model"; the authors suspect the fan still running and air leaking from the incubator | A warning that a simple model can be optimistic about how slowly an incubator cools; our model may be too |
+| Model structure | Air, mattress and heater nodes linked by resistances and capacities, solved with Runge-Kutta | The same family of model as ours |
+
+**Measured cool-down data:** the switch-off test (37 °C setpoint, 28 °C room, 20 minutes of cooling, repeated three times) is shown only in a figure (Figure 6), not a table. The curve could be read off the figure later for a rough check of our cooling rate. It is not a blackout test: the room was warm, there was no baby, and the incubator had a thermoelectric heater.
+
+**Limits to remember:** a different incubator, modified with a thermoelectric heater; the three resistance values differ by a factor of almost three, so the 13 W/°C figure is rough.
