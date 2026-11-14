@@ -180,3 +180,33 @@ Both apply only when the incubator walls are as warm as the air and the air has 
 - Room temperature: "If the room temperature is below 25°C (77°F), it is often impossible to compensate for radiant heat loss by increasing the air temperature inside the incubator." Our model does not include radiant loss to cold incubator walls, so at our default 22 °C room it may be optimistic about how warm the baby stays. This supports the finding that room temperature matters most, and it is a limitation to state.
 
 **Limits to remember:** a practical guide from 1997, not a research study; the classes are clinical conventions based on axillary or rectal temperature.
+
+## 8. Kebede et al. (2021)
+
+**Citation:** Kebede, F. S., Olivier, J.-C., Bourguet, S., Machmoum, M. (2021). Reliability evaluation of renewable power systems through distribution network power outage modelling. *Energies*, 14(11), 3225. https://doi.org/10.3390/en14113225 (Open access.)
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** sizing a solar PV and battery system for a grid-connected building on an unreliable grid. The case study is a university building in Addis Ababa, Ethiopia, with its load measured by a power analyser and five years of recorded grid outages. A genetic algorithm (NSGA-II) finds the cheapest PV and battery sizes for each reliability level, measured by the loss of power supply probability (LPSP). Outages are also simulated with a Markov model and a Weibull model to test the designs on many outage scenarios. Time step: 1 minute.
+
+**Why it matters for us:** it is the closest earlier method to our grid-with-outages-plus-solar sizing. We must cite it and say how ours differs.
+
+**Findings that agree with ours:**
+- Saturation: "the LPSP barely responded to PV area and battery sizes after certain values". We found the same: little benefit beyond about 1 kWp.
+- Night outages drive the battery: "The longer the outage duration and/or if it occurs at night when there is no PV production, the higher the battery size."
+- Long outages cost the most: longer outage duration makes the LPSP rise and demands larger systems.
+
+**How our work differs:**
+
+| | Kebede et al. (2021) | Our project |
+| --- | --- | --- |
+| Load | Measured building load (one month) | Incubator heater from a heat-balance model of the incubator and baby |
+| Outage data | Five years recorded at one building in Addis Ababa | Measured statistics from health facilities in Sierra Leone and DR Congo, turned into random outages |
+| Solar data | One site | Ten years of hourly PVGIS data at five sites |
+| Goal | Cheapest system for a chosen reliability level | Smallest battery for zero hours without power, and the trade-off curves |
+| Cost | Included (cost of energy) | Not included |
+| Time step | 1 minute | 1 hour (checked against our 1-second model) |
+
+**Ideas we could use later:** reporting reliability as LPSP (the standard measure) as well as "hours without power"; Weibull or Markov outage models as an alternative to our lognormal outage lengths; adding cost.
+
+**Limits to remember:** one building in one city; a university building load, not medical equipment.
