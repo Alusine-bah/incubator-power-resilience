@@ -303,3 +303,24 @@ Direct sunlight (SID, DNI) is less accurate (daily RMSE 24.1 and 43.2 W/m²).
 **Reading:** day-to-day errors are about twice the monthly ones. Our battery size is set by the worst run of cloudy days, so the daily accuracy is what matters for us, and it was measured mostly in Europe.
 
 **Limits to remember:** no reference station in humid tropical Africa; all accuracy figures are averages over mostly European and desert stations.
+
+## 12. McCord et al. (2026)
+
+**Citation:** McCord, R., Miles, S. B., Mughuma, J. M., Kammen, D. M., Kwong, L. H. (2026). Assessing the impacts of sufficient and reliable electricity in low-resource healthcare facilities. *Proceedings of the National Academy of Sciences (PNAS)*, 123(38), e2538126123. https://doi.org/10.1073/pnas.2538126123
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** whether reliable electricity changes patient outcomes. Surveys, power sensors and monthly health records from 303 facilities in three provinces of DR Congo (16,059 facility-months), analysed with methods designed to estimate cause and effect (targeted maximum likelihood estimation and two-way fixed effects).
+
+**What it gives this project (the "why it matters" evidence):**
+
+| Finding | What the paper says |
+| --- | --- |
+| Deaths among inpatients | Facilities with sufficient and reliable power (more than 22 hours of power a day) had a 41 percent lower inpatient mortality rate, 1.8 percentage points against an average of 4.5 percent in the other facilities |
+| Keeping power reliable over time | In 18 facilities with sensors, months with more than 22 hours a day of power had mortality 1.8 percentage points lower |
+| Children and newborns | Mortality fell in all wards, but significantly only in paediatric wards ("which includes neonatal mortality") and internal medicine |
+| Other effects | 17 percent more outpatients and more days worked by nurses |
+
+**How we will use it:** in the introduction, as the strongest evidence that unreliable power harms patients. The 22 hours a day threshold also matches the World Health Organization's definition of reliable electricity (less than 2 hours of outage a day), which the authors use.
+
+**Limits to remember:** the main reliability measure comes from a one-time survey, while sensors show reliability changes a lot over time; the sensor analysis covers only 18 facilities; the effect is for whole facilities, not for incubators or newborns specifically; one country.
