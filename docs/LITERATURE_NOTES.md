@@ -260,3 +260,46 @@ So our "7 to 9.8 W/m²/°C" is right (strictly 7.1 to 9.8). These numbers are se
 **Possible model change (not made yet):** add a wall node, so the baby loses heat by convection to the air and by radiation to walls a few degrees cooler. This was idea #12 ("better baby and wall model") in our earlier list, and it now has published numbers to test it against.
 
 **Limits to remember:** a review, so most numbers are quoted from other studies; we have checked them only as reported here.
+
+## 11. Pfeifroth et al. (2024)
+
+**Citation:** Pfeifroth, U., Drucke, J., Kothe, S., Trentmann, J., Schroder, M., Hollmann, R. (2024). SARAH-3 - satellite-based climate data records of surface solar radiation. *Earth System Science Data*, 16, 5243-5265. https://doi.org/10.5194/essd-16-5243-2024 (Open access.)
+
+**Checked:** 2026-11-15, from the article text on the journal website (copied by hand) and screenshots of Tables 2 to 5.
+
+**What the paper is about:** the SARAH-3 dataset of sunlight at the ground, estimated from Meteosat satellite images, and how well it matches ground measurements. PVGIS uses it as its default solar data for Africa.
+
+**What it tells us about our solar data:**
+
+| Point | What the paper says | What it means for us |
+| --- | --- | --- |
+| Area covered | 65° S to 65° N and 65° W to 65° E | Freetown, Bonthe, Kabala and Goma are inside. Dhaka (90° E) is outside, which explains why PVGIS used its other dataset (ERA5) for Dhaka |
+| Detail | 0.05° grid (about 5 km), every 30 minutes | Fine enough for single towns |
+| Accuracy of monthly sunlight | Mean bias about ±2 W/m²; mean absolute difference about 5 W/m² and RMSE 7 W/m² for monthly means at high-quality reference stations; daily values less accurate than monthly | Good on average |
+| Tropical Africa | Errors in sunshine duration are "larger for the tropical and subtropical stations of Africa", where SARAH-3 mostly overestimates sunshine, by more than 30 hours a month at some stations | Our solar output for Sierra Leone and Goma may be slightly too high, so our panel and battery sizes may be slightly too small |
+| Time periods | One consistent record for 1983 to 2020; from 2021 a near-real-time version with the same method; the paper advises care across that change | Our 2014 to 2023 data cross the change (2021) |
+
+**Caution:** the overestimate in tropical Africa is reported for sunshine duration (hours of bright sun), not directly for the solar energy we use. It is a warning sign, not a measured error for our sites.
+
+**Possible check later:** compare PVGIS's two datasets (SARAH-3 and ERA5) for Freetown, or ground measurements if any exist, to see how much our sizes change.
+
+**Reference stations (Table 2, checked from a screenshot):** the 17 high-quality BSRN stations used to check SARAH-3 are mostly in Europe. The African ones are Tamanrasset (Algeria, 22.8° N, Sahara desert, 1,385 m), Gobabeb (Namibia, 23.6° S, desert) and De Aar (South Africa, 30.7° S); the others nearest the tropics are Reunion Island (20.9° S) and Solar Village (Saudi Arabia, 24.9° N). None is in humid tropical West or Central Africa. So the good accuracy figures (bias about ±2 W/m²) were not tested in a climate like Freetown's or Goma's.
+
+**Other reference stations (Table 3):** the 23 GEBA stations used for monthly checks are all in Europe.
+
+**Accuracy numbers (Table 4, BSRN stations; SIS = sunlight on a flat surface, which PVGIS builds on):**
+
+| SIS accuracy | Monthly means | Daily means |
+| --- | --- | --- |
+| Bias | 2.1 W/m² | 2.0 W/m² |
+| Mean absolute difference | 5.2 W/m² | 10.8 W/m² |
+| RMSE | 7.0 W/m² | 15.9 W/m² |
+| Anomaly correlation | 0.94 | 0.96 |
+
+Direct sunlight (SID, DNI) is less accurate (daily RMSE 24.1 and 43.2 W/m²).
+
+**Sunshine duration (Table 5, all CLIMAT and ECA&D stations):** bias 9.5 h and mean absolute difference 20 h for monthly sums; 0.2 h and 1 h for daily sums. The larger errors at African stations come from the map in the text (Figure 12), not from this table.
+
+**Reading:** day-to-day errors are about twice the monthly ones. Our battery size is set by the worst run of cloudy days, so the daily accuracy is what matters for us, and it was measured mostly in Europe.
+
+**Limits to remember:** no reference station in humid tropical Africa; all accuracy figures are averages over mostly European and desert stations.
