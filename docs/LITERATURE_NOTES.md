@@ -233,3 +233,30 @@ Both apply only when the incubator walls are as warm as the air and the air has 
 **Measured cool-down data:** the switch-off test (37 °C setpoint, 28 °C room, 20 minutes of cooling, repeated three times) is shown only in a figure (Figure 6), not a table. The curve could be read off the figure later for a rough check of our cooling rate. It is not a blackout test: the room was warm, there was no baby, and the incubator had a thermoelectric heater.
 
 **Limits to remember:** a different incubator, modified with a thermoelectric heater; the three resistance values differ by a factor of almost three, so the 13 W/°C figure is rough.
+
+## 10. Delanaud et al. (2019)
+
+**Citation:** Delanaud, S., Chahin Yassin, F., Durand, E., Tourneux, P., Libert, J.-P. (2019). Can mathematical models of body heat exchanges accurately predict thermal stress in premature neonates? *Applied Sciences*, 9(8), 1541. https://doi.org/10.3390/app9081541 (Open access.)
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** a review of how a newborn in a closed incubator exchanges heat (convection, radiation, conduction, evaporation), and of the strengths and weak points of the models used to predict it.
+
+**What it confirms for this project (baby-to-air heat transfer):**
+
+| Baby's position (Wheldon's 3.3 kg manikin) | Convection hc (W/m²/°C) | Radiation hr (W/m²/°C) | Total (our arithmetic) |
+| --- | --- | --- | --- |
+| Foetal (curled) | 4.00 | 3.10 | 7.1 |
+| Relaxed | 3.90 | 3.70 | 7.6 |
+| Spread-eagle | 4.91 | 4.90 | 9.8 |
+
+So our "7 to 9.8 W/m²/°C" is right (strictly 7.1 to 9.8). These numbers are second-hand: the original is Wheldon, A. E. (1982), *Physics in Medicine and Biology*, 27, 285-296, which we have not read.
+
+**New points that matter for our model:**
+- **Cold walls.** In single-walled incubators the walls the baby "sees" are cooler than the air: the mean radiant temperature is 4.0 to 5.5 °C below the air (Ultman et al.), 2.7 °C (Decima et al.), 3.1 °C (Wheldon) and 3.5 °C (Sinclair). Our model lets the baby exchange heat only with air at the air temperature, so it underestimates the baby's heat loss. This is the third source pointing to the same gap (see WHO 1997, entry 7, and Sauer et al. 1984, entry 4).
+- **Smaller babies lose more.** Two manikins of 900 g and 1800 g: heat losses were 20.4 percent greater for the smaller one (Elabbassi et al., quoted here).
+- **The manikin was large.** Wheldon's manikin simulated a 3.3 kg baby with a simple shape; the authors say measurements with manikins of premature babies are preferable.
+
+**Possible model change (not made yet):** add a wall node, so the baby loses heat by convection to the air and by radiation to walls a few degrees cooler. This was idea #12 ("better baby and wall model") in our earlier list, and it now has published numbers to test it against.
+
+**Limits to remember:** a review, so most numbers are quoted from other studies; we have checked them only as reported here.
