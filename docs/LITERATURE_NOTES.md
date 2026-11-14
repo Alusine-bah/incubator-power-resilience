@@ -105,3 +105,26 @@ Both apply only when the incubator walls are as warm as the air and the air has 
 **Reading:** after the first week our setpoints agree with Sauer within about 0.5 °C, inside the paper's own scatter. In the first few days Sauer gives higher values, up to about 2 °C higher. A higher setpoint means more heat loss: at a 22 °C room, 35.0 °C instead of 33.5 °C raises the heater's steady load by about 13 percent (our arithmetic). So for babies in their first days, our battery sizes may be somewhat low. This is a possible model change to discuss at the build stage; nothing has been changed yet.
 
 **Limits to remember:** small study from the Netherlands; healthy infants only; values above 2 kg are extrapolated; test conditions (equal wall and air temperature, dew point 18 °C) differ from most real incubators.
+
+## 5. Miles et al. (2025)
+
+**Citation:** Miles, S. B., Mughuma, J. M., Moner-Girona, M., Kammen, D. M., Kwong, L. H. (2025). The power of health in the Democratic Republic of the Congo: Electricity quality and reliability in medical facilities of North Kivu Province. *Applied Energy*, 401, 126830.
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** cellular-connected sensors recorded outages, voltage and frequency at 25 health facilities in North Kivu, DR Congo, from 2022 to October 2024 (about 29 months).
+
+**What it confirms for this project:**
+
+| Our input | What the paper says |
+| --- | --- |
+| Outages a day at DR Congo facilities | Mean 0.67 a day across the 25 facilities (range 0 to 2.04) |
+| Typical outage time about 2 h | 2.01 h (range 0.03 to 10.9 h), see the note below |
+| Differences by facility type | General referral hospitals 1.17 h, referral health centres 3.80 h, health centres 3.91 h, private hospitals 0.16 h (Table 4) |
+| Uptime and voltage | Mean uptime 93.2 percent (46.7 to 100); voltage within ±10 percent of 230 V for 73.9 percent of the time |
+
+**Important note on what "2.01 h" means:** the paper defines it as the median *daily* outage time (hours per day) on days with at least one outage, averaged across facilities (Methods and the Table 4 heading). It is not the length of each single outage. Because most outage days have only one outage (0.67 a day on average), the two are similar, but not identical. In our project the outage length is our own chosen distribution (median 1.5 h, limited to 0.25 to 11 h), which this paper supports as a reasonable range rather than as a direct measurement.
+
+**Something to check later:** the paper summarises the Sierra Leone study (Wall and Odero, its reference 16) as "an average of 3 outages per day, each with a median duration of 3 h". Our notes from the Wall et al. report give 0.6 to 3.1 outages a day across 15 facilities. These may describe different facilities or summaries; we should check the Wall report directly.
+
+**Limits to remember:** one province of one country; facilities were selected, not random; the facilities with solar-only systems had almost no outages, so results depend strongly on how each facility is supplied.
