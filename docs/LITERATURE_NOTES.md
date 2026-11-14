@@ -48,3 +48,30 @@ One entry per paper, added when the paper itself has been read. Each entry says 
 **Useful later (not used yet):**
 - Steady-state results at several set temperatures from 38 °C to 30 °C, partly in a supplementary table. These could show whether heat loss stays constant across set temperatures. The supplementary file has not been read.
 - A test where the hood is opened for 1 minute with a warm-water manikin (36.7 °C core) inside, with core and skin temperatures recorded. This is real disturbance data that could help Paper 1 (detecting an open hood or porthole).
+
+## 3. Mestyan, Jarai and Fekete (1968)
+
+**Citation:** Mestyan, J., Jarai, I., Fekete, M. (1968). The total energy expenditure and its components in premature infants maintained under different nursing and environmental conditions. *Pediatric Research*, 2(3), 161-171.
+
+**Correction:** this paper is often cited as "Fekete 1968", but the first author is J. Mestyan. Cite it as Mestyan et al. (1968).
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** oxygen consumption, and so heat production, measured for several hours in 23 premature infants (birth weight 1100 to 2120 g, aged 2 to 31 days) under four care conditions.
+
+**What it supports for this project:** baby heat production of 1.9 to 2.8 W/kg (our default 2.0 W/kg).
+
+| Condition (from the paper) | Infants | Heat production, kcal/kg/day | W/kg (our conversion) |
+| --- | --- | --- | --- |
+| Incubator at 33 to 36 °C (neutral), human milk, basal | 9 | 35.4 ± 5.4 | 1.71 |
+| Same, total over the observation | 9 | 44.2 ± 7.4 | 2.14 |
+| Incubator at 33 to 36 °C (neutral), formula, basal | 4 | 39.7 ± 2.6 | 1.92 |
+| Same, total over the observation | 4 | 55.0 ± 4.0 | 2.66 |
+| Swaddled in a room at 20 to 22 °C, total | 5 | 58.3 | 2.82 |
+| Unclothed at 28 to 29 °C, total | 5 or 6 (the paper gives both) | 80 | 3.87 |
+
+Conversion: 1 kcal/kg/day = 4184 J / 86,400 s = 0.0484 W/kg.
+
+**Reading:** our model keeps the baby in a neutral incubator, so the first four rows apply: 1.7 to 2.7 W/kg. Our range of 1.9 to 2.8 W/kg sits inside or just above that, and our default 2.0 W/kg is close to the total for breast-fed infants (2.14). The last two rows show that a baby in a cooler environment produces more heat, which our model does not include.
+
+**Limits to remember:** a small study (23 infants), from Hungary in the 1960s, using the measuring methods of the time; all infants weighed 1100 g or more, so values for 500 to 1000 g babies are an extrapolation.
