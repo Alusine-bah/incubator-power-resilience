@@ -350,3 +350,26 @@ Direct sunlight (SID, DNI) is less accurate (daily RMSE 24.1 and 43.2 W/m²).
 **How we will use it:** the opening of the introduction (scale of the problem, incubators as critical equipment) and the definition of reliable electricity.
 
 **Limits to remember:** survey-based (facilities report their own outages); the reliability question covers only one or two weeks; regional averages, not specific to neonatal units.
+
+## 14. Balapangu Shankar et al. (2023)
+
+**Citation:** Balapangu Shankar, S., Amoako, E., Gavi, V. N., Dzidah, E., Abdul Razak, N. A., Kumordzi, P., Narh, S. A., Kuuziile, M. K. (2023). Development of a neonatal incubator for community health care centres in Ghana. *Research Square* (preprint, posted 15 February 2023). https://doi.org/10.21203/rs.3.rs-2475640/v1. A preprint: not peer-reviewed.
+
+**Checked:** 2026-11-15, against the preprint PDF.
+
+**What the paper is about:** a low-cost incubator designed at the University of Ghana for community health centres: bamboo and acrylic housing, LED strips as the heat source, an Arduino controller, temperature and humidity alarms, and a lithium-ion battery as backup during power outages.
+
+**What it shows about earlier battery backup for incubators:**
+
+| Point | What the preprint says |
+| --- | --- |
+| Why backup | For "power outages, load shedding, or interruptions, a power bank was constructed using a simple laptop battery" |
+| Power design | Grid power plus a 24 V lithium-ion battery; solar "was first taken into consideration but eventually rejected" because of its cost |
+| How the battery was sized | "the battery for the final design was selected to be 3500mAh, which is enough amperage to support the battery for 2 and half hours when the system's power consumption is less than 88W" |
+| Testing | LED heating, alarms and dimensions were tested; we found no test of the battery's run time |
+
+**Check of their sizing (our arithmetic):** 24 V x 3.5 Ah = 84 Wh. At 88 W that lasts about 1 hour, not 2.5 hours, even before losses. 2.5 hours would need an average draw of about 34 W, or a battery of about 220 Wh at 88 W. Their claim does not add up as written, unless "3500 mAh" refers to something else (for example, cells before they are combined).
+
+**Why it matters for us:** it is the closest example we have found of a battery sized for an incubator, and the size was chosen by a simple run-time rule with no outage data, no heat model and no test. It supports our novelty claim: sizing backup from measured outages and a heat-balance model has not been done in these designs.
+
+**Limits to remember:** a preprint, not peer-reviewed; a prototype with a different heat source (LEDs) and housing from a commercial incubator, so its power needs are not comparable to ours.
