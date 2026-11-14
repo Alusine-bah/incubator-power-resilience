@@ -128,3 +128,29 @@ Both apply only when the incubator walls are as warm as the air and the air has 
 **Something to check later:** the paper summarises the Sierra Leone study (Wall and Odero, its reference 16) as "an average of 3 outages per day, each with a median duration of 3 h". Our notes from the Wall et al. report give 0.6 to 3.1 outages a day across 15 facilities. These may describe different facilities or summaries; we should check the Wall report directly.
 
 **Limits to remember:** one province of one country; facilities were selected, not random; the facilities with solar-only systems had almost no outages, so results depend strongly on how each facility is supplied.
+
+## 6. Wall et al. (2024)
+
+**Citation:** Wall, A., Osunmuyiwa, O., Flaspohler, G., Odero, M., Goode, J., Klugman, N., Podolsky, M. (2024). *On the path to sustainable health electrification? Uncovering power quality and reliability challenges at electrified health facilities in Sierra Leone.* International Growth Centre, Final report SLE-20186. Free online. This is a report, not a peer-reviewed paper.
+
+**Checked:** 2026-11-15, against the PDF.
+
+**What the report is about:** nLine GridWatch sensors in wall outlets at 15 health facilities in Sierra Leone (seven hospitals, seven community health centres, one health post). The analysis period is 20 July to 31 August 2023 (six weeks).
+
+**What it confirms for this project:**
+
+| Our input | What the report says |
+| --- | --- |
+| 0.6 to 3.1 outages a day | Fewest at Ola During (0.63 a day), most at Wellington CHC (3.07 a day) |
+| 0.03 to 18 hours a day without power | Lowest Ola During (0.03 h a day), highest Bonthe Government Hospital (18.43 h a day); body text and appendix table agree |
+| Voltage as low as 127 V (0.55 of 230 V) | Wellington CHC spent on average 12.78 h a day outside the normal range, "dropping as low as 127 V at times" |
+| Staff report power too weak for a fan | Wellington's Community Health Officer: grid power "is not able to even turn the fan or turn on [the] computer" |
+
+**Settled questions:**
+- The executive summary says "as much as nine hours" a day without power, but the results and the appendix table give 18.43 h for Bonthe. We use the detailed results.
+- Miles et al. (2025) summarise this study as "3 outages per day, each with a median duration of 3 h". That is not in this report: 3.07 a day is the single worst facility, and the report gives hours per day, not the length of each outage. Dividing Wellington's 6.40 h a day by its 3.07 outages gives about 2 h per outage (our arithmetic).
+
+**Limits to remember:**
+- Wet season only. The report says the data "is only representative of PQR for the wet season months of July and August"; the main hydro plant gives 40 to 50 MW in the wet season but only 10 to 15 MW in the dry season, so dry-season outages may be worse.
+- "Poverty outages" (a facility unable to pay for grid power or fuel) were removed. At Waterloo CHC the real situation was 24 hours a day without power from 28 July, against the 6.63 h a day in the results.
+- Grey literature: a report, not peer-reviewed. For key numbers we pair it with Miles et al. (2025).
