@@ -21,6 +21,30 @@ One entry per paper, added when the paper itself has been read. Each entry says 
 
 **Used in the project for:** heat loss UA = 162.95 / (36 - 25) = 14.8 W/°C (our arithmetic), and heater power around 350 to 400 W.
 
-**Not in this paper (still to check):** incubator made in 2006, empty hood, steady state reached after about 57 minutes. These are probably in Yeler and Koseoglu (2022).
+**Not in this paper:** incubator made in 2006, empty hood, steady state after about 57 minutes. All three are confirmed in entry 2.
 
 **Limits to remember:** one incubator, one operating point (36 °C inside, 25 °C outside), measured in a lab in Turkey.
+
+## 2. Yeler and Koseoglu (2022)
+
+**Citation:** Yeler, O., Koseoglu, M. F. (2022). Energy efficiency and transient-steady state performance comparison of a resistance infant incubator and an improved thermoelectric infant incubator. *Engineering Science and Technology, an International Journal*, 31, 101055. (Open access.)
+
+**Checked:** 2026-11-15, against the published PDF.
+
+**What the paper is about:** the same team compares the original resistance incubator with their thermoelectric version, measuring warm-up, steady-state power, air flows, noise and the response when the hood is opened with a manikin inside.
+
+**What it confirms for this project:**
+
+| Our input | What the paper says |
+| --- | --- |
+| Device: AMS Amenity XP, made in 2006 | "AMS Amenity XP premature infant incubator manufactured in 2006 was purchased" |
+| Tests with an empty hood | The steady-state results come from "36 °C experiments without manikin" |
+| Steady state after about 57 min | The resistance system "reaches steady state around 57 min" |
+| 168 W average electrical power in steady state | The resistance system "consumes an average of 168 W of electrical power in the steady state" |
+| Air flows 0.002293 kg/s fresh, 0.005555 kg/s mixed; hood air 0.0929 m/s | Same values reported in the air-flow measurements |
+
+**Note:** 168 W (electrical, this paper) against 162.95 W (heat, 2020 paper). We read the difference of about 5 W as fan and controls; that is our inference, not the authors' statement.
+
+**Useful later (not used yet):**
+- Steady-state results at several set temperatures from 38 °C to 30 °C, partly in a supplementary table. These could show whether heat loss stays constant across set temperatures. The supplementary file has not been read.
+- A test where the hood is opened for 1 minute with a warm-water manikin (36.7 °C core) inside, with core and skin temperatures recorded. This is real disturbance data that could help Paper 1 (detecting an open hood or porthole).
