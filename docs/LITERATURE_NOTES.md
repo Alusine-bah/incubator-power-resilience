@@ -2,6 +2,13 @@
 
 One entry per paper, added when the paper itself has been read. Each entry says what we checked, page by page, and what it supports in this project.
 
+**Labels used in this project.** Every value carries one label: **Measured** (from a paper, with the page), **Textbook** (from a named book, with edition and page), **Derived** (our own arithmetic from the above) or **Assumption** (our choice, stated clearly). Anything not yet checked against its source is marked **to check**.
+
+**Still to obtain (paywalled or not yet found):**
+- Simon, B. N., Reddy, N. P., Kantak, A. (1994). A theoretical model of infant incubator dynamics. *Journal of Biomechanical Engineering*, 116(3), 263-269. The classic incubator model; ours is a simpler version of it.
+- Apenteng, B. A., et al. (2018). The effect of power outages on in-facility mortality in healthcare facilities: evidence from Ghana. *Global Public Health*, 13(5), 545-555. Quoted in entries 12 and 13; original not read.
+- Wheldon, A. E. (1982). Energy balance in the newborn baby: use of a manikin to estimate radiant and convective heat loss. *Physics in Medicine and Biology*, 27, 285-296. Original of the heat-transfer values in entry 10 (title to confirm).
+
 ## 1. Yeler and Koseoglu (2020)
 
 **Citation:** Yeler, O., Koseoglu, M. F. (2020). Optimization and experimental validation of a modular thermoelectric heat pump system for a premature baby incubator. *Journal of Electronic Materials*, 49(6), 4053-4066. https://doi.org/10.1007/s11664-020-08082-1
@@ -402,3 +409,29 @@ Direct sunlight (SID, DNI) is less accurate (daily RMSE 24.1 and 43.2 W/m²).
 2. A target that allows outages on 5 percent of days is reasonable for a facility on average, but not for an incubator, where a few hours without power can cause severe hypothermia. That is why our zero-outage target gives larger batteries for similar daily energy.
 
 **Limits to remember:** a continental planning study; demand tiers are standard assumptions, not measurements; no specific medical devices are modelled.
+
+## 16. Bergman, Lavine, Incropera and DeWitt (2011), textbook
+
+**Citation:** Bergman, T. L., Lavine, A. S., Incropera, F. P., DeWitt, D. P. (2011). *Fundamentals of Heat and Mass Transfer*, 7th edition. Hoboken, NJ: John Wiley & Sons. ISBN 978-0-470-50197-9.
+
+**Checked:** 2026-11-22, against the PDF of the 7th edition (page numbers are the printed book pages).
+
+**What it is:** the standard university textbook on heat transfer. It supplies the physics behind our model.
+
+**What we take from it:**
+
+| Use in our model | What the book gives | Where |
+| --- | --- | --- |
+| Radiation from a surface to its surroundings (baby to incubator wall) | Net radiation: q'' = ε σ (Ts^4 - Tsur^4) | Eq. 1.7, p. 10 |
+| The same written like convection | q = hr A (Ts - Tsur), with hr = ε σ (Ts + Tsur)(Ts^2 + Tsur^2) | Eqs. 1.8 and 1.9, p. 10 |
+| Convection and radiation together | q = h A (Ts - T∞) + ε A σ (Ts^4 - Tsur^4) | Eq. 1.10, p. 10 |
+| Heat paths in series (air to wall to room) | Thermal resistances; radiation resistance Rt,rad = 1 / (hr A); convection and radiation resistances act in parallel | Eq. 3.13, p. 115; composite wall, Section 3.1.3, pp. 115-116 |
+| Treating the air, wall and baby as single temperatures (lumped model) | Energy balance -h As (T - T∞) = ρ V c dT/dt | Eq. 5.2, p. 281 |
+| When a lumped model is valid | Biot number Bi = h Lc / k < 0.1 | Eq. 5.10, p. 284 |
+| Emissivity of human skin | ε = 0.95 at 300 K | Table A.11, p. 1009 |
+
+**A check using the book (derived, our arithmetic):** with ε = 0.95, skin at 37 °C and walls 4 to 6 °C cooler, Eq. 1.9 gives hr = 6.2 to 6.3 W/m²/°C. Wheldon's manikin values (3.1 to 4.9, entry 10) are lower. Our reading, not stated in either source: part of a baby's skin faces the mattress or its own limbs rather than the walls, so less of it radiates to the walls. We will use Wheldon's measured values and keep the textbook value as an upper limit.
+
+**Note on the Biot number:** a baby is not a perfect lumped body (its skin is cooler than its core), so our single "baby" temperature is a simplification. This is a limitation to state, and it is why the model's baby temperature is described as approximate.
+
+**Not taken from this book:** properties of the incubator's acrylic hood. Table A.12 lists Plexiglas only for its solar transmission, so the hood's emissivity and heat capacity remain to be sourced.
